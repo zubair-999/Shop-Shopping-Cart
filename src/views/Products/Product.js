@@ -39,7 +39,7 @@ const Product=({product})=>{
           Stock: {product.stock}
         </Card.Text>
         <Card.Text>
-          Category: {product.category}
+          Category: {product.category.name }
         </Card.Text>
         <Card.Text>
           <ReactReadMoreReadLess

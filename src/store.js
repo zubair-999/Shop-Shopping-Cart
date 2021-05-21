@@ -5,7 +5,7 @@ import { SignupReducer } from './redux/reducers/SignupReducer';
 import {SigninReducer} from "./redux/reducers/SigninReducer";
 import {ProductReducer} from "./redux/reducers/ProductReducer";
 import {
-  ProductAddReducer,
+  ProductAddReducer, ProductCategoryReducer,
   ProductDeleteReducer,
   ProductEditReducer,
   ProductUpdateReducer
@@ -88,7 +88,8 @@ const reducer = combineReducers({
   incomeDelete: IncomeDeleteReducer,
   profile:ProfileReducer,
   proUpdate:ProductUpdateReducer,
-  SalesTable:SalesTableReducer
+  SalesTable:SalesTableReducer,
+  prodCategory:ProductCategoryReducer
 })
 
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));

@@ -1,14 +1,16 @@
 import {
-    PRODUCT_ADD_REQUEST,
-    PRODUCT_ADD_SUCCESS,
-    PRODUCT_ADD_FAIL,
-    PRODUCT_EDIT_REQUEST,
-    PRODUCT_EDIT_SUCCESS,
-    PRODUCT_EDIT_FAIL,
-    PRODUCT_UPDATE_REQUEST,
-    PRODUCT_UPDATE_SUCCESS,
-    PRODUCT_UPDATE_FAIL,
-    PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL
+  PRODUCT_ADD_REQUEST,
+  PRODUCT_ADD_SUCCESS,
+  PRODUCT_ADD_FAIL,
+  PRODUCT_EDIT_REQUEST,
+  PRODUCT_EDIT_SUCCESS,
+  PRODUCT_EDIT_FAIL,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL, PRODUCT_CATEGORY_REQUEST, PRODUCT_CATEGORY_SUCCESS, PRODUCT_CATEGORY_FAIL,
 } from "../constants/Constants";
 
 export const ProductAddReducer = (state = {}, action) => {
@@ -59,4 +61,18 @@ export const ProductDeleteReducer = (state = {}, action) => {
         default:
             return state;
     }
+};
+
+
+export const ProductCategoryReducer = (state={productCategory:[]}, action) => {
+  switch (action.type) {
+    case PRODUCT_CATEGORY_REQUEST:
+      return { loading: true }
+    case PRODUCT_CATEGORY_SUCCESS:
+      return { loading: false, productCategory: action.payload }
+    case PRODUCT_CATEGORY_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state;
+  }
 };

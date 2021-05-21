@@ -1,13 +1,18 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 //import * as yup from "yup";
-import {ProductAddAction} from "../../redux/actions/ProductFunAction";
+import {ProductAddAction, ProductCategoryAction} from "../../redux/actions/ProductFunAction";
 
-const AddNewProduct = ({ history, setFieldValue }) => {
+const AddNewProduct = ({ history }) => {
   const dispatch = useDispatch()
+  const prodCategory = useSelector(state => state.prodCategory)
+  const {productCategory} = prodCategory
+  useEffect(() => {
+    dispatch(ProductCategoryAction());
+  }, [dispatch])
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const formik = useFormik({
     initialValues: {
@@ -91,13 +96,18 @@ const AddNewProduct = ({ history, setFieldValue }) => {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridCategory">
                       <Form.Label>Category</Form.Label>
-                      <Form.Control
-                        placeholder="Category"
-                        type="text"
-                        name="category"
-                        value={formik.values.category}
-                        onChange={formik.handleChange}
-                      />
+                      <Form.Control as="select"
+                                    name="category"
+                                    value={formik.values.category}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Select a category"
+                      >
+                        <option value="" label="Select an option " />
+                        {productCategory && productCategory.map(category => {
+                          return < option value={category._id} label={category.name} />
+                        })}
+                      </Form.Control>
                       {formik.errors.category && formik.touched.category && (
                         <p>{formik.errors.category}</p>
                       )}

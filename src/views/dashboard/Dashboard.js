@@ -115,7 +115,7 @@ const Dashboard = () => {
                     </CCol>
                   </CRow>
 
-                  <hr className="mt-0" />
+                  {/*<hr className="mt-0" />*/}
 
                   {/*<div className="progress-group mb-4">*/}
                   {/*  <div className="progress-group-prepend">*/}
@@ -237,7 +237,7 @@ const Dashboard = () => {
                     </CCol>
                   </CRow>
 
-                  <hr className="mt-0" />
+                  {/*<hr className="mt-0" />*/}
 
                   {/*<div className="progress-group mb-4">*/}
                   {/*  <div className="progress-group-header">*/}
@@ -309,15 +309,24 @@ const Dashboard = () => {
 
                 </CCol>
               </CRow>
-
-              <br />
-              <table className="table table-hover table-outline mb-0 d-none d-sm-table">
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+      <CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader>
+              Product Sales Report
+            </CCardHeader>
+            <CCardBody>
+              <table className="table table-hover table-outline mb-0 d d-sm-table">
                 <thead className="thead-light">
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Amount</th>
-                  </tr>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
+                </tr>
                 </thead>
                 <tbody>
                 {salesTableData && salesTableData.map(sale => {
@@ -333,6 +342,7 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow>
+
     </>
   )
 }

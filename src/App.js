@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './scss/style.scss';
 import {isLogin} from "./utils";
 
@@ -22,7 +22,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
           <React.Suspense fallback={loading}>
             <Switch>
               <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
@@ -32,7 +32,7 @@ class App extends Component {
               <Route path="/" name="Home" render={props => isLogin()?<TheLayout {...props}/>:<Redirect to="/login"/>} />
             </Switch>
           </React.Suspense>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

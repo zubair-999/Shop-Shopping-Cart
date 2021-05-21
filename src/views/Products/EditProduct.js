@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
-import {ProductEditAction, ProductUpdateAction} from "../../redux/actions/ProductFunAction";
+import {ProductCategoryAction, ProductEditAction, ProductUpdateAction} from "../../redux/actions/ProductFunAction";
 
 
 
@@ -15,6 +15,11 @@ const EditProduct = ({ match, history }) => {
   useEffect(() => {
     dispatch(ProductEditAction(productId));
   }, [dispatch, productId])
+  const prodCategory = useSelector(state => state.prodCategory)
+  const {productCategory} = prodCategory
+  useEffect(() => {
+    dispatch(ProductCategoryAction());
+  }, [dispatch])
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const formik = useFormik({
     initialValues: productEdit ? productEdit : {
@@ -98,13 +103,18 @@ const EditProduct = ({ match, history }) => {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridCategory">
                       <Form.Label>Category</Form.Label>
-                      <Form.Control
-                        placeholder="Category"
-                        type="text"
-                        name="category"
-                        value={formik.values.category}
-                        onChange={formik.handleChange}
-                      />
+                      <Form.Control as="select"
+                                    name="category"
+                                    value={formik.values.category}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    placeholder="Select a category"
+                      >
+                        <option value="" label="Select an option " />
+                        {productCategory && productCategory.map(category => {
+                          return < option value={category._id} label={category.name} />
+                        })}
+                      </Form.Control>
                       {formik.errors.category && formik.touched.category && (
                         <p>{formik.errors.category}</p>
                       )}

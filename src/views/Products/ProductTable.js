@@ -74,6 +74,10 @@ const ProductTable=()=> {
               itemsPerPage={5}
               pagination
               scopedSlots = {{
+                'category':
+                  (item)=>(
+                    <td>{item.category.name}</td>
+                  ),
                 'action':
                   (item)=>(
                     <td>
